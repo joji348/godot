@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://crw3q71hjiblp"]
+
+[ext_resource type="Script" path="res://cenas/group_aliens.gd" id="1_k0uak"]
+
+[node name="groupAliens" type="Node2D"]
+script = ExtResource("1_k0uak")
+
+[node name="Timerdescida" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Timerdisparar" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timerdescida" to="." method="_on_timerdescida_timeout"]
+[connection signal="timeout" from="Timerdisparar" to="." method="_on_timerdisparar_timeout"]

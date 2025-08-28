@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://c72nqu5k060pl"]
+
+[ext_resource type="Script" path="res://cenas/jogador.gd" id="1_nxdx3"]
+[ext_resource type="Texture2D" uid="uid://b25n8tkjbf2bf" path="res://Assets Space Invades/Sprites/jugador.png" id="2_bqwfy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0334h"]
+size = Vector2(15, 6)
+
+[sub_resource type="Animation" id="Animation_nwxkt"]
+resource_name = "Destruido"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"eleminado"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vg4wv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_ojg1l"]
+resource_name = "Vivo"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_apma4"]
+_data = {
+"Destruido": SubResource("Animation_nwxkt"),
+"RESET": SubResource("Animation_vg4wv"),
+"Vivo": SubResource("Animation_ojg1l")
+}
+
+[node name="jogador" type="CharacterBody2D" groups=["tanque"]]
+position = Vector2(126, 225)
+script = ExtResource("1_nxdx3")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bqwfy")
+hframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_0334h")
+
+[node name="pontodoLaser" type="Marker2D" parent="."]
+position = Vector2(0, -4)
+
+[node name="TimerDisparo" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_apma4")
+}
+autoplay = "Vivo"
+
+[connection signal="timeout" from="TimerDisparo" to="." method="_on_timer_disparo_timeout"]
