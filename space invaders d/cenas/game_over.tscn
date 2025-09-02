@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cepmonnop810h"]
+
+[ext_resource type="Script" path="res://cenas/game_over.gd" id="1_pchcj"]
+[ext_resource type="FontFile" uid="uid://mlnwkwianfcy" path="res://Assets Space Invades/fonts/atari-classic-font/AtariClassic-gry3.ttf" id="1_pj6nr"]
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_pchcj")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 87.0
+offset_top = 55.0
+offset_right = 171.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("1_pj6nr")
+text = "GAME
+OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="botaoReiniciar" type="Button" parent="."]
+offset_left = 52.0
+offset_top = 118.0
+offset_right = 204.0
+offset_bottom = 142.0
+theme_override_fonts/font = ExtResource("1_pj6nr")
+text = "REINICIAR"
+
+[connection signal="pressed" from="botaoReiniciar" to="." method="_on_botao_reiniciar_pressed"]

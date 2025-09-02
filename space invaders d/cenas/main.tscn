@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://6fuma2gmf78x"]
+[gd_scene load_steps=11 format=3 uid="uid://6fuma2gmf78x"]
 
 [ext_resource type="PackedScene" uid="uid://c72nqu5k060pl" path="res://cenas/jogador.tscn" id="1_7sjcc"]
 [ext_resource type="Script" path="res://cenas/main.gd" id="1_bq01n"]
@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://crw3q71hjiblp" path="res://cenas/group_aliens.tscn" id="3_fqloi"]
 [ext_resource type="FontFile" uid="uid://mlnwkwianfcy" path="res://Assets Space Invades/fonts/atari-classic-font/AtariClassic-gry3.ttf" id="5_hd7ub"]
 [ext_resource type="PackedScene" uid="uid://cfcdi5kxl58a8" path="res://cenas/bloco.tscn" id="6_u3awv"]
+[ext_resource type="Script" path="res://cenas/Chao.gd" id="7_sb733"]
+[ext_resource type="PackedScene" uid="uid://cepmonnop810h" path="res://cenas/game_over.tscn" id="8_000r4"]
+[ext_resource type="Script" path="res://cenas/AreaGameOver.gd" id="9_1nt6r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aj1nv"]
+size = Vector2(254, 20)
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_bq01n")
@@ -40,6 +46,8 @@ horizontal_alignment = 1
 [node name="Bases" type="Node2D" parent="."]
 
 [node name="Base" type="Node2D" parent="Bases"]
+position = Vector2(178, -29)
+metadata/_edit_group_ = true
 
 [node name="Bloco" parent="Bases/Base" instance=ExtResource("6_u3awv")]
 position = Vector2(57, 222)
@@ -75,6 +83,8 @@ position = Vector2(59, 226)
 position = Vector2(47, 218)
 
 [node name="Base2" type="Node2D" parent="Bases"]
+position = Vector2(141, -29)
+metadata/_edit_group_ = true
 
 [node name="Bloco" parent="Bases/Base2" instance=ExtResource("6_u3awv")]
 position = Vector2(57, 222)
@@ -110,6 +120,8 @@ position = Vector2(59, 226)
 position = Vector2(47, 218)
 
 [node name="Base3" type="Node2D" parent="Bases"]
+position = Vector2(103, -29)
+metadata/_edit_group_ = true
 
 [node name="Bloco" parent="Bases/Base3" instance=ExtResource("6_u3awv")]
 position = Vector2(57, 222)
@@ -145,6 +157,8 @@ position = Vector2(59, 226)
 position = Vector2(47, 218)
 
 [node name="Base4" type="Node2D" parent="Bases"]
+position = Vector2(49, -29)
+metadata/_edit_group_ = true
 
 [node name="Bloco" parent="Bases/Base4" instance=ExtResource("6_u3awv")]
 position = Vector2(57, 222)
@@ -180,6 +194,8 @@ position = Vector2(59, 226)
 position = Vector2(47, 218)
 
 [node name="Base5" type="Node2D" parent="Bases"]
+position = Vector2(13, -29)
+metadata/_edit_group_ = true
 
 [node name="Bloco" parent="Bases/Base5" instance=ExtResource("6_u3awv")]
 position = Vector2(57, 222)
@@ -215,6 +231,8 @@ position = Vector2(59, 226)
 position = Vector2(47, 218)
 
 [node name="Base6" type="Node2D" parent="Bases"]
+position = Vector2(-21, -28)
+metadata/_edit_group_ = true
 
 [node name="Bloco" parent="Bases/Base6" instance=ExtResource("6_u3awv")]
 position = Vector2(57, 222)
@@ -248,3 +266,20 @@ position = Vector2(59, 226)
 
 [node name="Bloco11" parent="Bases/Base6" instance=ExtResource("6_u3awv")]
 position = Vector2(47, 218)
+
+[node name="Chao" type="Node2D" parent="."]
+script = ExtResource("7_sb733")
+
+[node name="GameOver" parent="." instance=ExtResource("8_000r4")]
+visible = false
+
+[node name="AreaGameOver" type="Area2D" parent="."]
+position = Vector2(-10, 291)
+script = ExtResource("9_1nt6r")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaGameOver"]
+position = Vector2(138, -4)
+shape = SubResource("RectangleShape2D_aj1nv")
+
+[connection signal="area_entered" from="AreaGameOver" to="AreaGameOver" method="_on_area_entered"]

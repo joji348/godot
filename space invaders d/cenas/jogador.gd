@@ -37,6 +37,7 @@ func destruir():
 
 func eleminado():
 	if !self.is_queued_for_deletion():
-		get_parent().remove_child(self)
-		queue_free()
+		get_tree().change_scene_to_file("res://cenas/game_over.tscn")
+		#get_parent().remove_child(self)
+		#queue_free()
 

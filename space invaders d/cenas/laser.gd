@@ -11,3 +11,9 @@ func _on_body_entered(body):
 		body.explosion()
 		get_parent().remove_child(self)
 		queue_free()
+	
+	elif body.is_in_group("blocos"):
+		body.destruir()
+		if !is_queued_for_deletion():
+			get_parent().remove_child(self)
+			queue_free()
