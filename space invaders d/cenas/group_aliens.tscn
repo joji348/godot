@@ -13,5 +13,8 @@ autostart = true
 wait_time = 3.0
 autostart = true
 
+[node name="TimerBonus" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timerdescida" to="." method="_on_timerdescida_timeout"]
 [connection signal="timeout" from="Timerdisparar" to="." method="_on_timerdisparar_timeout"]
+[connection signal="timeout" from="TimerBonus" to="." method="_on_timer_bonus_timeout"]

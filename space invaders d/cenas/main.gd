@@ -8,3 +8,7 @@ func Somar_pontos_alien(a):
 	pontos += 100
 	label_pontos.text = str(pontos)
 
+func somar_bonus():
+	pontos += 500
+	label_pontos.text = str(pontos)
+

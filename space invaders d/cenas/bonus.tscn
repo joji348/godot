@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfa3v6og83bqv"]
+
+[ext_resource type="Script" path="res://Bonus.gd" id="1_ps2v8"]
+[ext_resource type="Texture2D" uid="uid://cf7j3gbcyumvl" path="res://Assets Space Invades/Sprites/bonus.png" id="2_qucdn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7h4rh"]
+size = Vector2(16, 7)
+
+[sub_resource type="Animation" id="Animation_rhf4g"]
+resource_name = "normal"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_1jhrb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_240yi"]
+resource_name = "destruido"
+length = 0.8
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vxea1"]
+_data = {
+"RESET": SubResource("Animation_1jhrb"),
+"destruido": SubResource("Animation_240yi"),
+"normal": SubResource("Animation_rhf4g")
+}
+
+[node name="Bonus" type="CharacterBody2D" groups=["aliens"]]
+position = Vector2(126, 29)
+script = ExtResource("1_ps2v8")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qucdn")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7h4rh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vxea1")
+}
+autoplay = "normal"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

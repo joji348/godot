@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c72nqu5k060pl"]
+[gd_scene load_steps=9 format=3 uid="uid://c72nqu5k060pl"]
 
 [ext_resource type="Script" path="res://cenas/jogador.gd" id="1_nxdx3"]
 [ext_resource type="Texture2D" uid="uid://b25n8tkjbf2bf" path="res://Assets Space Invades/Sprites/jugador.png" id="2_bqwfy"]
+[ext_resource type="AudioStream" uid="uid://bn6ln1ia2f2r2" path="res://Assets Space Invades/sfx/shoot.wav" id="3_qrs2i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0334h"]
 size = Vector2(15, 6)
@@ -99,5 +100,8 @@ libraries = {
 "": SubResource("AnimationLibrary_apma4")
 }
 autoplay = "Vivo"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qrs2i")
 
 [connection signal="timeout" from="TimerDisparo" to="." method="_on_timer_disparo_timeout"]

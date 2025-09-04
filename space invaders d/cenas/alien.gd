@@ -27,7 +27,10 @@ func _on_timer_timeout():
 
 func explosion():
 	animation_alien.play("destroyed")
-	
+	$AudioStreamPlayer.play()
+
+
+  
 
 func elimination():
 	emit_signal("alien_eliminado", self)
